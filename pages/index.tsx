@@ -294,7 +294,7 @@ export default function Home() {
             <div className="flex justify-between py-12 items-center">
               <div className="w-full sm:w-1/2 space-y-8">
                 <div className="space-y-2 ">
-                  <h1 className="text-7xl text-transparent font-extrabold bg-clip-text bg-gradient-to-br from-white to-zinc-600">
+                  <h1 className="text-7xl hover:text-white transition-colors ease-in text-transparent font-extrabold bg-clip-text bg-gradient-to-br from-white to-zinc-600">
                     Password Generator
                   </h1>
                   <p className="text-sm text-gray-400 ">
@@ -305,7 +305,7 @@ export default function Home() {
                 <div className="flex space-x-2">
                   <button
                     onClick={clearData}
-                    className="text-sm bg-zinc-50/80 hover:bg-zinc-50/90 transition-colors ease-in py-2 px-4 font-bold rounded-md text-black hover:shadow-lg"
+                    className="text-sm bg-zinc-50/80 hover:bg-zinc-50/90 transition-all ease-in py-2 px-4 font-bold rounded-md text-black hover:shadow-lg "
                   >
                     Clear data
                   </button>
