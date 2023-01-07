@@ -14,11 +14,12 @@ import {
   Cross1Icon,
   DotsHorizontalIcon,
   DotsVerticalIcon,
+  InfoCircledIcon,
   PlusCircledIcon,
 } from "@radix-ui/react-icons";
 
 import { WORD_LIST } from "../utils/words";
-import { useFieldArray, UseFieldArrayReturn, useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 
 import * as Toast from "@radix-ui/react-toast";
 import { z } from "zod";
@@ -31,7 +32,11 @@ const passwordSchema = z.object({
 });
 
 const schema = z.object({
-  seed: z.string().min(10, { message: "Seed needs to be longer" }),
+  seed: z
+    .string()
+    .min(30, {
+      message: "Seed phrase is required to be at least 30 characters long",
+    }),
   domains: z.string().array().optional(),
   passwords: z.array(passwordSchema).optional(),
 });
@@ -112,13 +117,6 @@ function generatePassword(seed: string, salt: string, length: number) {
   return password;
 }
 
-// type PasswordItemType = {
-//   site: string;
-//   password: string;
-//   visible: boolean;
-//   username: number;
-// };
-
 type PasswordItemType = z.infer<typeof passwordSchema>;
 
 const columnHelper = createColumnHelper<PasswordItemType>();
@@ -126,21 +124,20 @@ const columnHelper = createColumnHelper<PasswordItemType>();
 const columns = [
   columnHelper.accessor("site", {
     cell: (info) => (
-      <div className="">
+      <div className="max-w-[100px]">
         <input className="bg-transparent w-full" value={info.cell.getValue()} />
       </div>
     ),
     id: "domain",
     header: () => (
-      <div className="w-1/4">
+      <div className="max-w-[100px]">
         <span>Domain</span>
       </div>
     ),
   }),
-
   columnHelper.accessor("password", {
     header: () => (
-      <div className="flex-1">
+      <div className="">
         <p>Password</p>
       </div>
     ),
@@ -150,10 +147,10 @@ const columns = [
         onClick={() => {
           navigator.clipboard.writeText(info.cell.getValue());
         }}
-        className="w-full flex items-center space-x-4"
+        className="flex flex-1 items-center space-x-3"
       >
         <input
-          className="bg-transparent flex-1"
+          className="bg-transparent w-full"
           disabled
           value={info.cell.getValue()}
         />
@@ -168,7 +165,6 @@ const columns = [
 export default function Home() {
   const rerender = React.useReducer(() => ({}), {})[1];
   const [passwordLength, setPasswordLength] = useState(16);
-  const [password, setPassword] = useState("");
   const [domain, setDomain] = useState("");
 
   const defaults: z.infer<typeof schema> = {
@@ -272,7 +268,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="h-10" />
+        {/* <div className="h-10" /> */}
 
         {/* <p>
             Some notes. Here goes a tab. Password. Haiku poem to remember the
@@ -316,6 +312,12 @@ export default function Home() {
               className="bg-zinc-900/70 p-4 rounded-lg w-full border-[0.25px] border-zinc-600 shadow-sm focus:outline-blue-600"
               placeholder="e.g. cat play fence"
             />
+
+            {methods.formState.errors.seed && (
+              <p className="text-red-400">
+                * {methods.getFieldState("seed").error?.message}
+              </p>
+            )}
           </div>
 
           <fieldset className="space-y-2 py-4">
@@ -457,23 +459,24 @@ export default function Home() {
                   </tr>
                 ))}
               </tbody>
-              <tfoot>
-                {table.getFooterGroups().map((footerGroup) => (
-                  <tr key={footerGroup.id}>
-                    {footerGroup.headers.map((header) => (
-                      <th key={header.id}>
-                        <input className="bg-transparent" />
-                        {header.isPlaceholder
-                          ? null
-                          : flexRender(
-                              header.column.columnDef.footer,
-                              header.getContext()
-                            )}
-                      </th>
-                    ))}
-                  </tr>
-                ))}
-              </tfoot>
+              {/* <tfoot>
+                <div className="max-w-[100px] flex justify-between items-center">
+                  <input
+                    value={domain}
+                    onChange={(e) => setDomain(e.target.value.toUpperCase())}
+                    placeholder="New domain"
+                    className="p-4 bg-transparent"
+                  />
+                  <div
+                    className="ml-4"
+                    onClick={() => {
+                      handleSubmit()();
+                    }}
+                  >
+                    <PlusCircledIcon className="w-6 h-6" />
+                  </div>
+                </div>
+              </tfoot> */}
             </table>
           </div>
         </div>
