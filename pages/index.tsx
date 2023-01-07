@@ -269,7 +269,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="mx-auto h-full">
+      <main className="mx-auto h-full min-h-screen">
         <Circle />
         {warningVisible && (
           <div className="top-0 sticky space-y-2 w-full z-50">
@@ -289,7 +289,7 @@ export default function Home() {
           </div>
         )}
 
-        <div className="background z-50 sticky space-y-4 px-2 sm:px-4 md:px-5 h-full py-16">
+        <div className="background z-50 sticky space-y-4 px-2 sm:px-4 md:px-5 h-full min-h-screen py-16">
           <div className="max-w-4xl mx-auto">
             <div className="flex justify-between py-12 items-center">
               <div className="w-full sm:w-1/2 space-y-8">
