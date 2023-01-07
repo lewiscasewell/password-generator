@@ -5,3 +5,25 @@
 body {
   @apply bg-black text-gray-100;
 }
+
+@layer utilities {
+  .background {
+    background-image: radial-gradient(
+      circle at 50% 50%,
+      black 30%,
+      transparent 20.5%,
+      transparent 49.5%,
+      black 50%
+    );
+    background-size: 15px 15px;
+    backdrop-filter: blur(30px) brightness(30%);
+    -webkit-backdrop-filter: blur(30px) brightness(30%);
+    -moz-backdrop-filter: blur(30px) brightness(30%);
+  }
+
+  .circle {
+    stroke-dashoffset: 0;
+    stroke-width: 15%;
+    fill: none;
+  }
+}
