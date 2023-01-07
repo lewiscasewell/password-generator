@@ -17,7 +17,7 @@ import {
   PlusCircledIcon,
 } from "@radix-ui/react-icons";
 
-import { WORD_LIST } from "./utils/words";
+import { WORD_LIST } from "../utils/words";
 import { useFieldArray, UseFieldArrayReturn, useForm } from "react-hook-form";
 
 import * as Toast from "@radix-ui/react-toast";
