@@ -293,8 +293,8 @@ export default function Home() {
           <div className="max-w-4xl mx-auto">
             <div className="flex justify-between py-12 items-center">
               <div className="w-full sm:w-1/2 space-y-8">
-                <div className="space-y-2">
-                  <h1 className="text-7xl font-extrabold">
+                <div className="space-y-2 ">
+                  <h1 className="text-7xl text-transparent font-extrabold bg-clip-text bg-gradient-to-br from-white to-zinc-600">
                     Password Generator
                   </h1>
                   <p className="text-sm text-gray-400 ">
@@ -447,7 +447,7 @@ export default function Home() {
                 <div className="py-2">
                   <button
                     onClick={() => handleSubmit()()}
-                    className="text-white bg-rose-500 p-2 rounded-md font-bold hover:bg-rose-600 hover:shadow-lg transition-colors ease-in"
+                    className="text-white bg-rose-900 p-2 rounded-md font-bold hover:bg-rose-700 hover:shadow-lg transition-colors ease-in"
                   >
                     Generate passwords
                   </button>
